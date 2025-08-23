@@ -22,5 +22,3 @@ A digital platform designed to make reading, borrowing, and managing books easie
 We used a mix of tools to bring this idea to life:
 
 Frontend: HTML, CSS, JavaScript 
-
-Login system: Secure authentication so your account stays safe
