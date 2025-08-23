@@ -171,6 +171,37 @@
 
       html {
   scroll-behavior: smooth;
+
+  #testimonials .card {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(237, 233, 233, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+#testimonials h2 {
+  font-size: clamp(24px, 3.5vw, 34px);
+  margin-bottom: 20px;
+}
+
+#testimonialCarousel .carousel-inner {
+  padding: 20px;
+}
+
+#testimonialCarousel .carousel-item p {
+  font-style: italic;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+#testimonialCarousel .carousel-item footer {
+  font-size: 16px;
+  color: var(--muted);
+}
+
 }
 
 </style>
@@ -235,6 +266,37 @@ With a wide range of courses, quizzes, and certifications, we blend technology w
 </div>
  </section>
 
+ <section id="testimonials" class="block">
+  <div class="card">
+    <h2>What Our Learners Say</h2>
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <p class="lead">"This platform made learning Python easy and fun! The interactive lessons and quizzes really helped me grasp the concepts better."</p>
+          <footer>- John Doe, Python Student</footer>
+        </div>
+        <div class="carousel-item">
+          <p class="lead">"The Cyber Security course was very good. The instructors explained complex topics in simple terms."</p>
+          <footer>- Jane Smith, Cyber Security Enthusiast</footer>
+        </div>
+        <div class="carousel-item">
+          <p class="lead">"I love how flexible the courses are. I can learn at my own pace, and the support team is always there when I need help."</p>
+          <footer>- Mark Wilson, Machine Learning Student</footer>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
   <footer style="background:#0b1a2e; color:#fff; padding:40px 0; font-family:Arial, sans-serif;">
   <div style="max-width:1200px; margin:auto; display:flex; flex-wrap:wrap; justify-content:space-between;">
 
@@ -267,13 +329,12 @@ With a wide range of courses, quizzes, and certifications, we blend technology w
     </div>
 
     <div style="flex:1 1 250px; margin:20px;">
-      <h3>Contact Us</h3>
-      <p>Email: support@elearning.com</p>
-      <p>Phone: +1 234 567 890</p>
-      <div style="margin-top:10px;">
-        <a href="#" style="margin-right:10px; color:#4db8ff; text-decoration:none;">Facebook</a>
-        <a href="#" style="margin-right:10px; color:#4db8ff; text-decoration:none;">Twitter</a>
-        <a href="#" style="margin-right:10px; color:#4db8ff; text-decoration:none;">LinkedIn</a>
+      <form id="contactForm">
+  <input type="email" id="email" placeholder="Your Email" required>
+  <textarea id="message" placeholder="Your Message" required></textarea>
+  <button type="submit">Send</button>
+</form>
+
       </div>
     </div>
   </div>
@@ -312,9 +373,43 @@ With a wide range of courses, quizzes, and certifications, we blend technology w
 const isMobile = /Mobi/i.test(navigator.userAgent);
 const particleCount = isMobile ? 20 : 50;
 
+const backToTopButton = document.getElementById("backToTop");
+
+window.onscroll = function() {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    backToTopButton.style.display = "block";
+  } else {
+    backToTopButton.style.display = "none";
+  }
+};
+
+backToTopButton.onclick = function() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+
+  if (email === "" || message === "") {
+    alert("Please fill out both fields.");
+  } else {
+    alert("Message sent successfully!");
+    document.getElementById('contactForm').reset();
+  }
+});
+
+
 
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<button id="backToTop" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 9999;">
+  ↑ Back to Top
+</button>
+
 </body>
 </html>
