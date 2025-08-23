@@ -13,9 +13,6 @@ A digital platform designed to make reading, borrowing, and managing books easie
 
 📖 Read details about each book before borrowing
 
- 
- 
- Admins can add new books, manage users, and keep the library updated
 
 🛠 How we built it
 
