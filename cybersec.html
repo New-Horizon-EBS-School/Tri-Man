@@ -1,169 +1,282 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Machine Learning Tutorial</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background: #f4f4f9;
-      color: #333;
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cyber Security</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-sE7LzAmldhrLzL0e4h4yk35mWk51jLunKZKH2tvThc8A9RwRGqx7KoRhGHi9A1mC" crossorigin="anonymous"></script>
+
+
+<style>
+      :root {
+        --bg: #080808;
+        --fg: #f5f7fb;
+        --muted: #aab0c2;
+        --accent: #00ffe0;
+        --accent-2: #7aa8ff;
+      }
+
+      body {
+        color: var(--fg);
+        background: var(--bg);
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        font-size: 20px;
+        line-height: 1.8;
+        margin: 0;
+        padding: 0;
+        padding-top: 70px; 
+      }
+
+#c {
+	position:absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #171719;
+}
+
+
+      h1, h2, h3, h4 {
+        color: #ffffff;
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 0.6em;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      p, li {
+        color: var(--muted);
+      }
+
+      p.lead {
+        color: #d0d4e0;
+        font-size: 21px;
+        line-height: 1.75;
+      }
+
+      a {
+        color: var(--accent-2);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        color: var(--accent);
+      }
+
+      .nav {
+        font-size: 25px;
+        background: rgba(10, 12, 18, 0.65);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: fixed;
+        inset-inline: 0;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 22px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        color: var(--accent);
+      }
+
+      .links {
+        display: flex;
+        gap: 18px;
+      }
+
+      .links a {
+        padding: 6px 10px;
+        border-radius: 8px;
+        transition: background 0.25s, color 0.25s, transform 0.2s;
+      }
+
+      .links a:hover {
+        color: var(--bg);
+        background: var(--accent);
+        transform: translateY(-1px);
+      }
+
+      #loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+        z-index: 9999;
+      }
+
+      .spinner {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 4px solid #1f2330;
+        border-top-color: var(--accent);
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      section.block {
+        min-height: 90vh;
+        display: grid;
+        place-items: center;
+        padding: 100px 22px 60px;
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      section.block.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
     }
-    header {
-      background: #000000;
-      color: white;
-      padding: 15px 20px;
-      text-align: center;
-    }
-    nav {
-      background: #000000;
-      padding: 10px;
-      text-align: center;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .container {
-      width: 90%;
-      max-width: 900px;
-      margin: 20px auto;
-      background: rgb(255, 255, 255);
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #f4f4f4;
-      margin-top: 20px;
-    }
-    ul {
-      margin: 10px 0 20px 20px;
-    }
-    img {
-      max-width: 100%;
-      display: block;
-      margin: 10px auto;
-      border-radius: 5px;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #1a237e;
-      color: white;
-      margin-top: 20px;
-    }
-  </style>
+
+      .card {
+        width: min(900px, 92vw);
+        border-radius: 20px;
+        padding: 28px;
+        background: linear-gradient(180deg, rgba(237, 233, 233, 0.04), rgba(73, 72, 72, 0.02));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        text-align: center;
+      }
+
+      h2 {
+        font-size: clamp(24px, 3.5vw, 34px);
+        margin: 0 0 10px;
+      }
+
+      p.lead {
+        margin: 0 auto;
+        max-width: 68ch;
+      }
+
+      .carousel-item img {
+        object-fit: cover;
+        height: 450px;
+        width: 100%;
+      }
+
+      html {
+  scroll-behavior: smooth;
+}
+
+</style>
 </head>
 <body>
-  <header>
-    <h1>Machine learning Tutorial</h1>
-  </header>
+<div id="loader" aria-live="polite"><div class="spinner" role="status" aria-label="Loading"></div></div>
 
-  <nav>
+<header class="nav">
+    <div class="brand">Machine Language</div>
+    <nav class="links" aria-label="Primary">
+    <a href="#about">About</a>
     <a href="#basics">Basics</a>
     <a href="#foundations">Foundations</a>
-    <a href="#evolution">Evolution</a>
-    <a href="#AL">Cryptography</a>
-    <a href="#Algortihm">Ethics</a>
+    
+    
+    </nav>
+  </header>
 
-  </nav>
-
-  <div class="container">
-    <h2>About Machine learning</h2>
-    <p>
-      Machine Learning (ML) is a branch of Artificial Intelligence (AI) that enables computers to learn from data and improve their performance without being explicitly programmed. Instead of following fixed rules, ML systems analyze patterns in data, make predictions, and adapt over time. It powers many technologies we use daily—such as recommendation systems, virtual assistants, fraud detection, and self-driving cars—making it one of the most important fields shaping the future of technology.
-    </p>
-    <img src="maxresdefault (1).jpg" alt="Machine learning">
-
-    <h2 id="basics">Understanding Cyber Security Basics</h2>
+ <section id="about" class="block">
+    <div class="card">
+      <h2>About Machine Learning</h2>
+      <p class="lead">
+Machine Learning (ML) is a branch of Artificial Intelligence (AI) that enables computers to learn from data and improve their performance without being explicitly programmed. Instead of following fixed rules, ML systems analyze patterns in data, make predictions, and adapt over time. It powers many technologies we use daily—such as recommendation systems, virtual assistants, fraud detection, and self-driving cars—making it one of the most important fields shaping the future of technology</p>
+      <img src="machine.jpg" alt="Machine illustration">
+    </div>
+  </section>
+ <section id="basics" class="block">
+    <div class="card">
+    <h2>Understanding Machine Learning Basics</h2>
+    <p class = "lead">
     <ul>
-      <li>What is Machine learning</li>
-      <li>Applications of Machine Learning</li>
+          
+      <li>What is Machine learning?</li>
+      <li>Machine Learning (ML) is a branch of Artificial Intelligence (AI) that enables computers to learn from data and improve their performance without being explicitly </li>
+      <li>Applications of Machine Learning?</li>
      
     </ul>
+    </p></div></section>
 
-    <h2 id="foundations">Foundations of Machine Learning</h2>
-    <ul>
-      <li>Computer Networking &amp; Protocols</li>
-      <li>Email Protocols, DHCP, DNS</li>
-      <li>Wireless LAN Basics</li>
-      <li>Web Basics &amp; Security</li>
-      <li>Cloud Computing Security</li>
+    <section id="foundations" class="block">
+    <div class="card">
+    <h2>Foundation of Machine Learning</h2>
+    <p class = "lead">
+        <ul>
+      <li>Dataset Training &amp; Protocols</li>
+      <li>Preprocessing the dataset </li>
+      <li>EDA</li>
+      <li>Choosing right algorithm</li>
+      <li>Maintaining the Acuuracy of the model</li>
     </ul>
+    </ul></p></div></section>
+   
 
-    <h2 id="evolution">Machine Learning Evolution &amp; Objectives</h2>
-    <ul>
-      <li>History of Machine learning</li>
-      <li>Internet &amp; e-Commerce</li>
-      <li> Metrics</li>
-      <li>Security Management System</li>
-      <li>Cybersecurity Frameworks</li>
-    </ul>
+    <div class="d-grid gap-2 col-6 mx-auto">
+  <button class="btn btn-primary" type="button"><a href="https://www.geeksforgeeks.org/computer-networks/cyber-system-security/">Learn More</a></button>
+</div>
 
-    <h2 id="crypto">Cryptography and Access Control</h2>
-    <ul>
-      <li>Symmetric vs Asymmetric Encryption</li>
-      <li>Public Key Infrastructure</li>
-      <li>Electronic Signature</li>
-      <li>Identity &amp; Access Management</li>
-    </ul>
 
-    <h2 id="ethics">Cyber Ethics, Laws &amp; Governance</h2>
-    <ul>
-      <li>Cyber Ethics &amp; Privacy</li>
-      <li>Ethical Hacking</li>
-      <li>IT Act</li>
-      <li>Intellectual Property in Cyberspace</li>
-      <li>Cybersecurity Policies</li>
-    </ul>
-
-    <h2 id="threats">Cyber Threats &amp; Attackers</h2>
-    <ul>
-      <li>Cyber Crimes &amp; Criminal Types</li>
-      <li>Social Engineering</li>
-      <li>Cyber-stalking &amp; Botnets</li>
-      <li>Phishing &amp; Identity Theft</li>
-      <li>Cyber-terrorism</li>
-    </ul>
-
-    <h2 id="exploits">Cyber Attack Techniques &amp; Exploits</h2>
-    <ul>
-      <li>Malware, Trojans, Steganography</li>
-      <li>Buffer Overflow &amp; SQL Injection</li>
-      <li>Password Cracking</li>
-      <li>DDoS Attacks &amp; Network Attacks</li>
-      <li>Web Server Attacks &amp; SSRF</li>
-    </ul>
-
-    <h2 id="defense">Cyber Defense</h2>
-    <ul>
-      <li>System Backup &amp; Secure Coding</li>
-      <li>Vulnerability Assessment</li>
-      <li>Penetration Testing</li>
-      <li>Firewalls &amp; IDS/IPS</li>
-    </ul>
-
-    <h2 id="encryption">Encryption Systems</h2>
-    <ul>
-      <li>Classical Encryption Techniques</li>
-      <li>Data Encryption Standard (DES)</li>
-      <li>Advanced Encryption Standard (AES)</li>
-      <li>Triple DES, RC4</li>
-      <li>Mathematics Behind Cryptography</li>
-    </ul>
-  </div>
 
   <footer>
-    <p>&copy; 2025 Cybersecurity Tutorial</p>
+    <p>&copy; 2025 Machine Learning Tutorial</p>
   </footer>
+
+<script>
+    document.querySelectorAll('.links a').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    });
+  });
+  const loaderEl = document.getElementById('loader');
+  window.addEventListener('load', () => loaderEl.style.display = 'none');
+  setTimeout(() => { if (loaderEl.style.display !== 'none') loaderEl.style.display = 'none'; }, 2500);
+
+ const blocks = document.querySelectorAll('section.block');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){ en.target.classList.add('visible'); }
+    });
+  },{ threshold:0.15 });
+  blocks.forEach(b=>io.observe(b));
+
+  const myCarouselElement = document.querySelector('#carouselExampleIndicators');
+
+  const carousel = new bootstrap.Carousel('#carouselExampleIndicators', {
+    interval: 3000, 
+    ride: 'carousel'
+  });
+
+const isMobile = /Mobi/i.test(navigator.userAgent);
+const particleCount = isMobile ? 20 : 50;
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<a href="index.html">Return To Home</a>
 </body>
 </html>
