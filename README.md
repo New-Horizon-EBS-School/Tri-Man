@@ -7,9 +7,6 @@ A digital platform designed to make reading, borrowing, and managing books easie
 
 📚 Online Library – Tri_Man
 
-# Hey there! 👋 Welcome to Online Library by Tri_Man.
-This project is all about making reading simple and fun — no more waiting in line at a library. Just open the site, find your favorite books, borrow them online, and enjoy reading.
-
 🌟 What you can do here
 
 🔍 Search for Online IT topics
